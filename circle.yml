@@ -10,3 +10,4 @@ test:
   pre:
     - cd web2py/applications
     - pwd
+    - ls -a
