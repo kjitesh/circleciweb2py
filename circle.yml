@@ -13,7 +13,7 @@ test:
     - mv ~/circleciweb2py ~/web2py/applications/circi
     - pwd
     - ls -a
+    - python ~/web2py/web2py.py -a 123 --nogui &
+
   override:
-    - cd ~/web2py/applications
-    - pwd
-    - nosetests ~/web2py/applications/circi
+    - python ~/web2py/applications/circi/functests/functional_tests.py
