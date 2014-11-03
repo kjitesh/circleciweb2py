@@ -33,7 +33,7 @@ class FunctionalTest(unittest.TestCase):
 def start_web2py_local_server():
     """prints current directory path, and starts web2py local server"""
     print os.path.curdir
-    return subprocess.Popen(['python','../web2py.py','run','-a "123"'])
+    return subprocess.Popen(['python','~/web2py/web2py.py','run','-a "123"'])
 
 def run_functional_tests(pattern=None):
     print 'running tests'
