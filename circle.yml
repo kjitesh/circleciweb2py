@@ -1,0 +1,5 @@
+## Customize checkout
+checkout:
+  pre:
+    - git clone https://github.com/web2py/web2py.git web2py
+    - cd web2py/applications

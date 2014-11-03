@@ -11,14 +11,14 @@ class FunctionalTest(unittest.TestCase):
     
     @classmethod
     def setUpClass(self):
-        self.web2py = start_web2py_local_server()
+        #self.web2py = start_web2py_local_server()
         self.browser = webdriver.Firefox()
         self.browser.implicitly_wait(1)
 
     @classmethod
     def tearDownClass(self):
         self.browser.close()
-        self.web2py.kill()
+        #self.web2py.kill()
 
     def get_response_code(self, url):
         """Returns the response code of given url
@@ -33,7 +33,7 @@ class FunctionalTest(unittest.TestCase):
 def start_web2py_local_server():
     """prints current directory path, and starts web2py local server"""
     print os.path.curdir
-    return subprocess.Popen(['python','../../../web2py.py','run','-a "123"'])
+    return subprocess.Popen(['python','web2py.py','run','-a "123"'])
 
 def run_functional_tests(pattern=None):
     print 'running tests'
