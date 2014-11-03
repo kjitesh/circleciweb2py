@@ -10,6 +10,10 @@ checkout:
 ## Customize test commands
 test:
   pre:
-    - cd web2py/applications
+    - mv ~/circleciweb2py ~/web2py/applications/circi
     - pwd
     - ls -a
+  override:
+    - cd ~/web2py/applications
+    - pwd
+    - nosetests ~/web2py/applications/circi
