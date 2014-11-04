@@ -2,7 +2,7 @@ from functional_tests import FunctionalTest, BASE_URL
 
 class TestHomePage (FunctionalTest):
 
-    def test_can_view_circi_home_page(self):
+    def atest_can_view_circi_home_page(self):
 
         # open browser and go to welcome app
         self.browser.get(BASE_URL + '/circi/')
@@ -13,7 +13,7 @@ class TestHomePage (FunctionalTest):
 
 class TestListingPage (FunctionalTest):
 
-    def test_can_view_listing_page(self):
+    def atest_can_view_listing_page(self):
 
         # open browser and go to welcome app
         self.browser.get(BASE_URL + '/circi/default/show_records')

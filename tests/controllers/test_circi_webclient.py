@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 
-def test_tweet_posting(client, web2py):
+def atest_tweet_posting(client, web2py):
     '''tweet posting test
     '''
 
@@ -26,7 +26,7 @@ def register_new_user(client):
     client.post('/default/user/register', data=data)
 
    
-def test_validate_new_person(client, web2py):
+def atest_validate_new_person(client, web2py):
     '''Is the form validating?
     '''
     register_new_user(client)

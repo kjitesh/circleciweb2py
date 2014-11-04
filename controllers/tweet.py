@@ -21,6 +21,9 @@ def index():
    if auth.user: redirect(URL('home'))
    return locals()
 
+def all():
+   tweets = db(db.tweets).select(orderby=~db.tweets.posted_on,limitby=(0,100))
+   return locals()
 
 # show user's wall, showing profile and posts
 def wall():

@@ -21,6 +21,15 @@ def test_default_index_exists(web2py):
     html = web2py.response.render('circi/index.html', result)
     assert "Hello World" in html
 
+def test_all_tweets_page(web2py):
+    """Check if all tweets page is displaying"""
+    # run the controller, without view
+    result = web2py.run('tweets', 'all', web2py)
+
+    # now, render the view with context received from controller
+    html = web2py.response.render('circi/all.html', result)
+    assert "All Tweets" in html
+
 
 
 

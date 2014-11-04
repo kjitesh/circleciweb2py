@@ -7,14 +7,4 @@ checkout:
   post:
     - ls -a ~
 
-## Customize test commands
-test:
-  pre:
-    - mv ~/circleciweb2py ~/web2py/applications/circi
-    - pwd
-    - ls -a
-    - python ~/web2py/web2py.py -a 123 --nogui &
 
-  override:
-    - python ~/web2py/applications/circi/functests/functional_tests.py
-    - py.test -x -v -s ~/web2py/applications/circi/tests/
