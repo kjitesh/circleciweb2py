@@ -9,8 +9,20 @@
 ## be redirected to HTTPS, uncomment the line below:
 # request.requires_https()
 
+from web2pytest import web2pytest
+import os
+
+
 if not request.env.web2py_runtime_gae:
     ## if NOT running on Google App Engine use SQLite or other DB
+    if web2pytest.is_running_under_test(request, request.application):
+        # When running under test, db cannot be ':memory:'
+        # because it is recreated in each request and a webclient test
+        # can make many requests to validate a single scenario.
+        db = DAL('sqlite://%s.sqlite' % request.application,
+                folder=os.path.dirname(web2pytest.testfile_name()),
+                pool_size=1,
+                check_reserved=['all'])
     db = DAL('sqlite://storage.sqlite',pool_size=1,check_reserved=['all'])
 else:
     ## connect to Google BigTable (optional 'google:datastore://namespace')
@@ -41,11 +53,12 @@ response.generic_patterns = ['*'] if request.is_local else []
 ## (more options discussed in gluon/tools.py)
 #########################################################################
 
-from gluon.tools import Auth, Service, PluginManager
+from gluon.tools import Auth, Service, PluginManager, Crud
 
 auth = Auth(db)
 service = Service()
 plugins = PluginManager()
+crud = Crud(db)
 
 ## create all tables needed by auth if not custom tables
 auth.define_tables(username=False, signature=False)
@@ -83,5 +96,21 @@ use_janrain(auth, filename='private/janrain.key')
 ## >>> for row in rows: print row.id, row.myfield
 #########################################################################
 
+# a table to store posted tweets
+db.define_table('tweets',
+    Field('body','text',requires=IS_LENGTH(140,1),label="Wass up?"),
+    Field('posted_on','datetime',readable=False,writable=False),
+    Field('posted_by','reference auth_user',readable=False,writable=False))
+
+#a table to store follower relationships
+db.define_table('followers',
+   Field('follower','reference auth_user'),
+   Field('followee','reference auth_user'))
+#Convenience methods to make code more compact
+me = auth.user_id
+
+def name_of(user): return '%(first_name)s %(last_name)s' % user
+
 ## after defining tables, uncomment below to enable auditing
 # auth.enable_record_versioning(db)
+

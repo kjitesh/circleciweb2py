@@ -17,3 +17,4 @@ test:
 
   override:
     - python ~/web2py/applications/circi/functests/functional_tests.py
+    - py.test -x -v -s ~/web2py/applications/circi/tests/

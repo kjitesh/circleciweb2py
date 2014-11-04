@@ -20,11 +20,6 @@ def index():
     response.flash = T("Welcome to web2py!")
     return dict(message=T('Hello World'))
 
-def show_records():
-    """
-    Page to display records
-    """
-    return dict(message=T("Records are as follows:"))
 
 def user():
     """
